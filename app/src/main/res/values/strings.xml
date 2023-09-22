@@ -40,4 +40,14 @@
     <string name="text_title_menu" translatable="false">Fish Burger</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_desc">Fillet ikan garing di atas roti bundar empuk dengan saus dan pelengkap lezat. Rasa dan kenikmatan dalam satu gigitan!</string>
+    <string name="text_shop_location">Lokasi</string>
+    <string name="text_desc_shop_location" translatable="false">Jl. BSD Green Office Park Jl. BSD Grand Boulevard, Sampora, BSD, Kabupaten Tangerang, Banten 15345</string>
+    <string name="text_cart">Tambah ke Keranjang - Rp %1$d</string>
+    <string name="text_desc_ib_back">image button back</string>
+    <string name="text_amount">1</string>
+    <string name="text_desc_iv_minus">image view minus</string>
+    <string name="text_desc_iv_plus">image view plus</string>
+    <string name="text_desc_iv_menu">image view menu</string>
+    <string name="text_desc_iv_shop_location">image view shop location</string>
 </resources>

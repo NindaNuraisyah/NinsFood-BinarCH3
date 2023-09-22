@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.catnip.ninsfood_binarch3.data.CategoriesDataSource
@@ -27,7 +28,13 @@ class FragmentHome : Fragment() {
     }
     private val adapter: MenuListAdapter by lazy {
         MenuListAdapter(AdapterLayoutMode.LINEAR) { menu: Menu ->
+            navigateToDetail(menu)
         }
+    }
+    private fun navigateToDetail(menu: Menu) {
+        findNavController().navigate(
+            FragmentHomeDirections.actionFragmentHomeToFragmentDetail(menu)
+        )
     }
 
     override fun onCreateView(
