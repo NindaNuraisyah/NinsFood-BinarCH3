@@ -1,3 +1,43 @@
 <resources>
     <string name="app_name">NinsFood-BinarCH3</string>
+    <string name="text_header_name" translatable="false">Hai Binarian,</string>
+    <string name="text_header_greeting">Mau makan apa hari ini?</string>
+    <string name="text_search">Cari</string>
+    <string name="text_discount" translatable="false">Discount 30%</string>
+    <string name="text_discount_desc">Pesan Makanan lewat aplikasi dan dapatkan diskon mu</string>
+    <string name="text_title_categories">Kategori</string>
+    <string name="text_burger_category" translatable="false">Burger</string>
+    <string name="text_noodle_category">Mie</string>
+    <string name="text_juice_category">Jus</string>
+    <string name="text_snack_category" translatable="false">Snack</string>
+    <string name="text_header_list_menu">List Menu</string>
+    <string name="text_fish_burger" translatable="false">Fish Burger</string>
+    <string name="text_beef_burger" translatable="false">Beef Burger</string>
+    <string name="text_chicken_burger" translatable="false">Chicken Burger</string>
+    <string name="text_garden_burger" translatable="false">Garden Burger</string>
+    <string name="text_price_fish_burger" translatable="false">Rp. 40.000</string>
+    <string name="text_price_beef_burger" translatable="false">Rp. 45.000</string>
+    <string name="text_price_chicken_burger" translatable="false">Rp. 20.000</string>
+    <string name="text_price_garden_burger" translatable="false">Rp. 15.000</string>
+    <string name="desc_background_banner" translatable="false">background_banner</string>
+    <string name="desc_trolley_header" translatable="false">trolley header</string>
+    <string name="desc_user_header" translatable="false">user header</string>
+    <string name="desc_search" translatable="false">search</string>
+    <string name="desc_discount_banner" translatable="false">discount_banner</string>
+    <string name="desc_burger_category" translatable="false">burger category</string>
+    <string name="desc_noodle_category" translatable="false">noodle category</string>
+    <string name="desc_juice_category" translatable="false">juice category</string>
+    <string name="desc_snack_category" translatable="false">snack_category</string>
+    <string name="desc_view_all_list_menu" translatable="false">view all list menu</string>
+    <string name="desc_fish_burger" translatable="false">fish burger</string>
+    <string name="desc_icon_add_1" translatable="false">icon add 1</string>
+    <string name="desc_beef_burger" translatable="false">beef burger</string>
+    <string name="desc_icon_add_2" translatable="false">icon_add_2</string>
+    <string name="desc_chicken_burger" translatable="false">chicken burger</string>
+    <string name="desc_icon_add_3" translatable="false">icon add 3</string>
+    <string name="desc_garden_burger" translatable="false">garden burger</string>
+    <string name="desc_icon_add_4" translatable="false">icon add 4</string>
+    <string name="text_title_menu" translatable="false">Fish Burger</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
