@@ -1,12 +1,15 @@
 package com.catnip.ninsfood_binarch3.presentation.common.adapter
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.catnip.ninsfood_binarch3.R
 import com.catnip.ninsfood_binarch3.core.ViewHolderBinder
 import com.catnip.ninsfood_binarch3.databinding.ItemCartProductBinding
+import com.catnip.ninsfood_binarch3.databinding.ItemCartProductOrderBinding
 import com.catnip.ninsfood_binarch3.model.Cart
 import com.catnip.ninsfood_binarch3.model.CartProduct
 import com.catnip.ninsfood_binarch3.utils.doneEditing
@@ -38,7 +41,15 @@ class CartListAdapter(private val cartListener: CartListener? = null) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        TODO("Not yet implemented")
+        return if (cartListener != null) CartViewHolder(
+            ItemCartProductBinding.inflate(
+                LayoutInflater.from(parent.context), parent, false
+            ), cartListener
+        ) else CartOrderViewHolder(
+            ItemCartProductOrderBinding.inflate(
+                LayoutInflater.from(parent.context), parent, false
+            )
+        )
     }
 
     override fun getItemCount(): Int = dataDiffer.currentList.size
@@ -88,6 +99,35 @@ class CartViewHolder(
             ivDelete.setOnClickListener { cartListener?.onRemoveCartClicked(item.cart) }
         }
     }
+}
+
+class CartOrderViewHolder(
+    private val binding: ItemCartProductOrderBinding,
+) : RecyclerView.ViewHolder(binding.root), ViewHolderBinder<CartProduct> {
+    override fun bind(item: CartProduct) {
+        setCartData(item)
+        setCartNotes(item)
+    }
+
+    private fun setCartData(item: CartProduct) {
+        with(binding) {
+            binding.ivProductImage.load(item.product.imgUrl) {
+                crossfade(true)
+            }
+            tvTotalQuantity.text =
+                itemView.rootView.context.getString(
+                    R.string.total_quantity,
+                    item.cart.itemQuantity.toString()
+                )
+            tvProductName.text = item.product.name
+            tvProductPrice.text = (item.cart.itemQuantity * item.product.price).toCurrencyFormat()
+        }
+    }
+
+    private fun setCartNotes(item: CartProduct) {
+        binding.tvNotes.text = item.cart.itemNotes
+    }
+
 }
 
 interface CartListener {
