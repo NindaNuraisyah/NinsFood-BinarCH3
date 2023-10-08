@@ -5,4 +5,6 @@
     <color name="pink">#FFF0F0</color>
     <color name="orange">#EFB495</color>
     <color name="gray">#BDBDBD</color>
+    <color name="grey_text">#767676</color>
+    <color name="transparent">#00FFFFFF</color>
 </resources>
