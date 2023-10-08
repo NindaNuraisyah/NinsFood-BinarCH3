@@ -50,4 +50,7 @@
     <string name="text_desc_iv_plus">image view plus</string>
     <string name="text_desc_iv_menu">image view menu</string>
     <string name="text_desc_iv_shop_location">image view shop location</string>
+    <string name="title_tab_profile">Profile</string>
+    <string name="title_tab_cart">Cart</string>
+    <string name="title_tab_home">Home</string>
 </resources>
