@@ -22,6 +22,7 @@ import com.catnip.ninsfood_binarch3.data.repository.ProductRepositoryImpl
 import com.catnip.ninsfood_binarch3.databinding.FragmentHomeBinding
 import com.catnip.ninsfood_binarch3.model.Categories
 import com.catnip.ninsfood_binarch3.model.Product
+import com.catnip.ninsfood_binarch3.presentation.feature.detailproduct.DetailProductActivity
 import com.catnip.ninsfood_binarch3.presentation.feature.home.adapter.AdapterLayoutMode
 import com.catnip.ninsfood_binarch3.presentation.feature.home.adapter.CategoriesListAdapter
 import com.catnip.ninsfood_binarch3.presentation.feature.home.adapter.ProductListAdapter
@@ -62,7 +63,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun navigateToDetail(item: Product) {
-
+        DetailProductActivity.startActivity(requireContext(), item)
     }
 
     override fun onCreateView(
