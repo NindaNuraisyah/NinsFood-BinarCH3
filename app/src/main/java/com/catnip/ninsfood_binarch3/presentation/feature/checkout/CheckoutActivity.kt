@@ -12,6 +12,7 @@ import com.catnip.ninsfood_binarch3.data.repository.CartRepository
 import com.catnip.ninsfood_binarch3.data.repository.CartRepositoryImpl
 import com.catnip.ninsfood_binarch3.databinding.ActivityCheckoutBinding
 import com.catnip.ninsfood_binarch3.presentation.common.adapter.CartListAdapter
+import com.catnip.ninsfood_binarch3.presentation.feature.dialog.DialogFragment
 import com.catnip.ninsfood_binarch3.utils.GenericViewModelFactory
 import com.catnip.ninsfood_binarch3.utils.proceedWhen
 import com.catnip.ninsfood_binarch3.utils.toCurrencyFormat
@@ -45,6 +46,10 @@ class CheckoutActivity : AppCompatActivity() {
     private fun setClickListener() {
         binding.ivBack.setOnClickListener {
             onBackPressed()
+        }
+        binding.btnCheckout.setOnClickListener {
+            val successDialog = DialogFragment()
+            successDialog.show(supportFragmentManager, "SuccessDialog")
         }
     }
 
