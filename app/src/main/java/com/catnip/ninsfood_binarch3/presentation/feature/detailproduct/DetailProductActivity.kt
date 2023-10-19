@@ -68,7 +68,7 @@ class DetailProductActivity : AppCompatActivity() {
         }
 
         viewModel.priceLiveData.observe(this) {
-            binding.btnCart.text = it.toCurrencyFormat()
+            binding.tvDetailTotalPrice.text = it.toCurrencyFormat()
         }
 
         viewModel.navigateToMapsLiveData.observe(this) { location ->

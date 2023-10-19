@@ -4,7 +4,7 @@
     <string name="text_header_greeting">Mau makan apa hari ini?</string>
     <string name="text_search">Cari</string>
     <string name="text_discount" translatable="false">Discount 30%</string>
-    <string name="text_discount_desc">Pesan Makanan lewat aplikasi dan dapatkan diskon mu</string>
+    <string name="text_discount_desc">Pesan Makanan lewat aplikasi dan\ndapatkan diskon mu</string>
     <string name="text_title_categories">Kategori</string>
     <string name="text_burger_category" translatable="false">Burger</string>
     <string name="text_noodle_category">Mie</string>
@@ -43,7 +43,7 @@
     <string name="text_desc">Fillet ikan garing di atas roti bundar empuk dengan saus dan pelengkap lezat. Rasa dan kenikmatan dalam satu gigitan!</string>
     <string name="text_shop_location">Lokasi</string>
     <string name="text_desc_shop_location" translatable="false">Jl. BSD Green Office Park Jl. BSD Grand Boulevard, Sampora, BSD, Kabupaten Tangerang, Banten 15345</string>
-    <string name="text_cart">Tambah ke Keranjang - Rp %1$d</string>
+    <string name="text_cart">Tambahkan ke Keranjang</string>
     <string name="text_desc_ib_back">image button back</string>
     <string name="text_amount">1</string>
     <string name="text_desc_iv_minus">image view minus</string>
@@ -70,4 +70,24 @@
     <string name="text_title_email">Email</string>
     <string name="text_email">nindanuraisyah0903@gmail.com</string>
     <string name="text_title_no_hp">No. Telepon</string>
+    <string name="hint_name">Your Name</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_confirm_password">Confirm Password</string>
+    <string name="text_register">Register</string>
+    <string name="text_already_have_an_account_click_here">Already have an Account ? Login Here</string>
+    <string name="text_error_email_empty">Email should not be empty</string>
+    <string name="text_error_email_invalid">Enter a valid format email</string>
+    <string name="text_error_password_empty">Password should not be empty</string>
+    <string name="text_error_password_less_than_8_char">Password cannot less than 8 character</string>
+    <string name="text_password_does_not_match">Password doesn\'t match</string>
+    <string name="text_error_name_cannot_empty">Name cannot be empty</string>
+    <string name="text_highlight_login_here">Login Here</string>
+    <string name="text_highlight_register">Register Here</string>
+    <string name="text_log_in">Log in</string>
+    <string name="text_not_registered_yet_register_here">Not registered yet ? Register Here</string>
+    <string name="btn_change_profile">Change Profile</string>
+    <string name="text_change_password">Change Password</string>
+    <string name="text_logout_account">Logout</string>
+    <string name="text_error_name_empty">Name can\\\'t be empty</string>
 </resources>
