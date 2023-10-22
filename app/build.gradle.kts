@@ -47,13 +47,13 @@ android {
 
         create("production") {
 
-            buildConfigField("String", "BASE_URL", "\"https://39cc9dac-21fc-401d-9cec-9100ffc66406.mock.pstmn.io\"")
+            buildConfigField("String", "BASE_URL", "\"https://e89d4fc6-fd7b-4bae-b372-a31a73f3869e.mock.pstmn.io\"")
 
         }
 
         create("integration") {
 
-            buildConfigField("String", "BASE_URL", "\"https://39cc9dac-21fc-401d-9cec-9100ffc66406.mock.pstmn.io\"")
+            buildConfigField("String", "BASE_URL", "\"https://e89d4fc6-fd7b-4bae-b372-a31a73f3869e.mock.pstmn.io\"")
 
         }
 
@@ -97,4 +97,7 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
+    //chucker
+    debugImplementation ("com.github.chuckerteam.chucker:library:4.0.0")
+    releaseImplementation ("com.github.chuckerteam.chucker:library-no-op:4.0.0")
 }

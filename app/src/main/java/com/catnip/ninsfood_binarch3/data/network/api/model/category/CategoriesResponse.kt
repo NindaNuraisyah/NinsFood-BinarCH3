@@ -1,15 +1,14 @@
-package com.catnip.ninsfood_binarch3.data.network.api.model.menu
+package com.catnip.ninsfood_binarch3.data.network.api.model.category
 
-
-import com.google.gson.annotations.SerializedName
 import androidx.annotation.Keep
+import com.google.gson.annotations.SerializedName
 
 @Keep
-data class MenuResponse(
+data class CategoriesResponse(
     @SerializedName("code")
     val code: Int?,
     @SerializedName("data")
-    val data: List<Data>?,
+    val data: List<CategoryItemResponse>?,
     @SerializedName("message")
     val message: String?,
     @SerializedName("status")

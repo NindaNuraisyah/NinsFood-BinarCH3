@@ -5,61 +5,53 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.catnip.ninsfood_binarch3.data.datasource.dummy.DummyCategoriesDataSource
-import com.catnip.ninsfood_binarch3.data.datasource.dummy.DummyCategoriesDataSourceImpl
-import com.catnip.ninsfood_binarch3.data.datasource.dummy.DummyProductDataSource
-import com.catnip.ninsfood_binarch3.data.datasource.dummy.DummyProductDataSourceImpl
-import com.catnip.ninsfood_binarch3.data.datasource.local.database.AppDatabase
-import com.catnip.ninsfood_binarch3.data.datasource.local.database.datasource.ProductDatabaseDataSource
-import com.catnip.ninsfood_binarch3.data.datasource.local.datastore.UserPreferenceDataSource
 import com.catnip.ninsfood_binarch3.data.datasource.local.datastore.UserPreferenceDataSourceImpl
 import com.catnip.ninsfood_binarch3.data.datasource.local.datastore.appDataStore
+import com.catnip.ninsfood_binarch3.data.network.api.datasource.NinsFoodApiDataSource
+import com.catnip.ninsfood_binarch3.data.network.api.service.NinsFoodApiService
 import com.catnip.ninsfood_binarch3.data.repository.ProductRepository
 import com.catnip.ninsfood_binarch3.data.repository.ProductRepositoryImpl
 import com.catnip.ninsfood_binarch3.databinding.FragmentHomeBinding
-import com.catnip.ninsfood_binarch3.model.Categories
 import com.catnip.ninsfood_binarch3.model.Product
 import com.catnip.ninsfood_binarch3.presentation.feature.detailproduct.DetailProductActivity
 import com.catnip.ninsfood_binarch3.presentation.feature.home.adapter.AdapterLayoutMode
-import com.catnip.ninsfood_binarch3.presentation.feature.home.adapter.CategoriesListAdapter
-import com.catnip.ninsfood_binarch3.presentation.feature.home.adapter.ProductListAdapter
+import com.catnip.ninsfood_binarch3.presentation.feature.home.adapter.subadapter.CategoriesListAdapter
+import com.catnip.ninsfood_binarch3.presentation.feature.home.adapter.subadapter.ProductListAdapter
 import com.catnip.ninsfood_binarch3.utils.GenericViewModelFactory
 import com.catnip.ninsfood_binarch3.utils.PreferenceDataStoreHelperImpl
 import com.catnip.ninsfood_binarch3.utils.proceedWhen
-
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 
 class HomeFragment : Fragment() {
+
     private lateinit var binding: FragmentHomeBinding
 
-    private val datasource: DummyProductDataSource by lazy {
-        DummyProductDataSourceImpl()
-    }
-
-    private val adapter: ProductListAdapter by lazy {
-        ProductListAdapter(AdapterLayoutMode.LINEAR) { product: Product ->
-            navigateToDetail(product)
+    private val categoryAdapter: CategoriesListAdapter by lazy {
+        CategoriesListAdapter {
+            viewModel.getProducts(it.name)
         }
     }
 
-    private val viewModel : HomeViewModel by viewModels {
-        GenericViewModelFactory.create(HomeViewModel(createProductRepo(), createPreferenceDataSource()))
+    private val productAdapter: ProductListAdapter by lazy {
+        ProductListAdapter(AdapterLayoutMode.LINEAR) { product: Product ->
+           navigateToDetail(product)
+       }
     }
 
-    private fun createProductRepo() : ProductRepository {
-        val cds: DummyCategoriesDataSource = DummyCategoriesDataSourceImpl()
-        val database = AppDatabase.getInstance(requireContext())
-        val productDao = database.productDao()
-        val productDataSource = ProductDatabaseDataSource(productDao)
-        return ProductRepositoryImpl(productDataSource, cds)
-    }
+    private val viewModel: HomeViewModel by viewModels {
+        val chuckerInterceptor = ChuckerInterceptor(requireContext().applicationContext)
+        val service = NinsFoodApiService.invoke(chuckerInterceptor)
+        val dataSource = NinsFoodApiDataSource(service)
+        val repo: ProductRepository =
+            ProductRepositoryImpl(dataSource)
 
-    private fun createPreferenceDataSource() : UserPreferenceDataSource {
-        val dataStore = this.requireContext().appDataStore
+        val dataStore = requireActivity().appDataStore
         val dataStoreHelper = PreferenceDataStoreHelperImpl(dataStore)
-        return UserPreferenceDataSourceImpl(dataStoreHelper)
+        val userPreferenceDataSource = UserPreferenceDataSourceImpl(dataStoreHelper)
+        GenericViewModelFactory.create(HomeViewModel(repo, userPreferenceDataSource))
     }
 
     private fun navigateToDetail(item: Product) {
@@ -70,36 +62,88 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        showListCategories(viewModel.getCategoriesData())
+        observeData()
+        getData()
         setupList()
         setupSwitch()
         setSwitchAction()
         observeGridPref()
-        observeProductData()
+        observeData()
     }
 
-    private fun observeProductData() {
-        viewModel.productListLiveData.observe(viewLifecycleOwner){
+    private fun getData() {
+        viewModel.getCategories()
+        viewModel.getProducts()
+    }
+
+    private fun observeData() {
+        viewModel.categories.observe(viewLifecycleOwner) {
             it.proceedWhen(doOnSuccess = {
-                it.payload?.let { it1 -> adapter.submitData(it1) }
+                binding.layoutStateCategory.root.isVisible = false
+                binding.layoutStateCategory.pbLoading.isVisible = false
+                binding.layoutStateCategory.tvError.isVisible = false
+                binding.rvCategories.apply {
+                    isVisible = true
+                    adapter = categoryAdapter
+                }
+                it.payload?.let { data -> categoryAdapter.submitData(data) }
+            }, doOnLoading = {
+                binding.layoutStateCategory.root.isVisible = true
+                binding.layoutStateCategory.pbLoading.isVisible = true
+                binding.layoutStateCategory.tvError.isVisible = false
+                binding.rvCategories.isVisible = false
+            }, doOnError = {
+                binding.layoutStateCategory.root.isVisible = true
+                binding.layoutStateCategory.pbLoading.isVisible = false
+                binding.layoutStateCategory.tvError.isVisible = true
+                binding.layoutStateCategory.tvError.text = it.exception?.message.orEmpty()
+                binding.rvCategories.isVisible = false
+            })
+        }
+        viewModel.products.observe(viewLifecycleOwner) {
+            it.proceedWhen(doOnSuccess = {
+                binding.layoutStateProduct.root.isVisible = false
+                binding.layoutStateProduct.pbLoading.isVisible = false
+                binding.layoutStateProduct.tvError.isVisible = false
+                binding.rvProduct.apply {
+                    isVisible = true
+                    adapter = productAdapter
+                }
+                it.payload?.let { data -> productAdapter.submitData(data) }
+            }, doOnLoading = {
+                binding.layoutStateProduct.root.isVisible = true
+                binding.layoutStateProduct.pbLoading.isVisible = true
+                binding.layoutStateProduct.tvError.isVisible = false
+                binding.rvProduct.isVisible = false
+            }, doOnError = {
+                binding.layoutStateProduct.root.isVisible = true
+                binding.layoutStateProduct.pbLoading.isVisible = false
+                binding.layoutStateProduct.tvError.isVisible = true
+                binding.layoutStateProduct.tvError.text = it.exception?.message.orEmpty()
+                binding.rvProduct.isVisible = false
+            }, doOnEmpty = {
+                binding.layoutStateProduct.root.isVisible = true
+                binding.layoutStateProduct.pbLoading.isVisible = false
+                binding.layoutStateProduct.tvError.isVisible = true
+                binding.layoutStateProduct.tvError.text = "Product not found"
+                binding.rvProduct.isVisible = false
             })
         }
     }
     private fun observeGridPref() {
         viewModel.usingGridLiveData.observe(viewLifecycleOwner) { isUsingGrid ->
             binding.switchListGrid.isChecked = isUsingGrid
-            (binding.rvMenu.layoutManager as GridLayoutManager).spanCount =
+            (binding.rvProduct.layoutManager as GridLayoutManager).spanCount =
                 if (isUsingGrid) 2 else 1
-            adapter.adapterLayoutMode =
+            productAdapter.adapterLayoutMode =
                 if (isUsingGrid) AdapterLayoutMode.GRID else AdapterLayoutMode.LINEAR
-            adapter.refreshList()
+            productAdapter.refreshList()
         }
     }
 
@@ -109,20 +153,11 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun showListCategories(data : List<Categories>) {
-        val categoryListAdapter = CategoriesListAdapter()
-        binding.rvCategories.adapter = categoryListAdapter
-        binding.rvCategories.layoutManager = LinearLayoutManager(requireContext(),
-            LinearLayoutManager.HORIZONTAL, false )
-
-        categoryListAdapter.setData(data)
-    }
-
     private fun setupList() {
-        val span = if(adapter.adapterLayoutMode == AdapterLayoutMode.LINEAR) 1 else 2
-        binding.rvMenu.apply {
+        val span = if(productAdapter.adapterLayoutMode == AdapterLayoutMode.LINEAR) 1 else 2
+        binding.rvProduct.apply {
             layoutManager = GridLayoutManager(requireContext(),span)
-            adapter = this@HomeFragment.adapter
+            adapter = this@HomeFragment.productAdapter
         }
 
     }
@@ -131,5 +166,4 @@ class HomeFragment : Fragment() {
             viewModel.setUsingGridPref(isChecked)
         }
     }
-
 }
