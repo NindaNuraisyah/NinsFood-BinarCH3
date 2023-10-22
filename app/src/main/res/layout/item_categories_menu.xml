@@ -6,19 +6,18 @@
     android:layout_height="wrap_content"
     android:clickable="true"
     android:focusable="true"
-    android:paddingVertical="6dp">
+    android:layout_marginEnd="8dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_categories"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="25dp"
+        app:cardCornerRadius="16dp"
         app:cardElevation="0dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:id="@+id/ll_category"
@@ -26,13 +25,13 @@
             android:layout_height="wrap_content"
             android:background="@color/orange"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:padding="6dp">
 
             <ImageView
                 android:id="@+id/iv_category"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:padding="2dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 tools:src="@tools:sample/avatars" />
 
             <TextView
@@ -40,12 +39,10 @@
                 style="@style/TextAppearance.Material3.BodySmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="2dp"
                 android:ellipsize="end"
-                tools:text="@tools:sample/full_names"
                 android:textAlignment="center"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                tools:text="@tools:sample/full_names" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

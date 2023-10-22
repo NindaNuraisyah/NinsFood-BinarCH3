@@ -12,6 +12,8 @@ import com.catnip.ninsfood_binarch3.R
 import com.catnip.ninsfood_binarch3.data.datasource.local.database.AppDatabase
 import com.catnip.ninsfood_binarch3.data.datasource.local.database.datasource.CartDataSource
 import com.catnip.ninsfood_binarch3.data.datasource.local.database.datasource.CartDatabaseDataSource
+import com.catnip.ninsfood_binarch3.data.network.api.datasource.NinsFoodApiDataSource
+import com.catnip.ninsfood_binarch3.data.network.api.service.NinsFoodApiService
 import com.catnip.ninsfood_binarch3.data.repository.CartRepository
 import com.catnip.ninsfood_binarch3.data.repository.CartRepositoryImpl
 import com.catnip.ninsfood_binarch3.databinding.FragmentCartBinding
@@ -23,6 +25,7 @@ import com.catnip.ninsfood_binarch3.utils.GenericViewModelFactory
 import com.catnip.ninsfood_binarch3.utils.hideKeyboard
 import com.catnip.ninsfood_binarch3.utils.proceedWhen
 import com.catnip.ninsfood_binarch3.utils.toCurrencyFormat
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 
 class CartFragment : Fragment() {
 
@@ -32,7 +35,10 @@ class CartFragment : Fragment() {
         val database = AppDatabase.getInstance(requireContext())
         val cartDao = database.cartDao()
         val cartDataSource: CartDataSource = CartDatabaseDataSource(cartDao)
-        val repo: CartRepository = CartRepositoryImpl(cartDataSource)
+        val chuckerInterceptor = ChuckerInterceptor(requireContext().applicationContext)
+        val service = NinsFoodApiService.invoke(chuckerInterceptor)
+        val apiDataSource = NinsFoodApiDataSource(service)
+        val repo: CartRepository = CartRepositoryImpl(cartDataSource, apiDataSource)
         GenericViewModelFactory.create(CartViewModel(repo))
     }
 

@@ -11,6 +11,8 @@ import coil.load
 import com.catnip.ninsfood_binarch3.data.datasource.local.database.AppDatabase
 import com.catnip.ninsfood_binarch3.data.datasource.local.database.datasource.CartDataSource
 import com.catnip.ninsfood_binarch3.data.datasource.local.database.datasource.CartDatabaseDataSource
+import com.catnip.ninsfood_binarch3.data.network.api.datasource.NinsFoodApiDataSource
+import com.catnip.ninsfood_binarch3.data.network.api.service.NinsFoodApiService
 import com.catnip.ninsfood_binarch3.data.repository.CartRepository
 import com.catnip.ninsfood_binarch3.data.repository.CartRepositoryImpl
 import com.catnip.ninsfood_binarch3.databinding.ActivityDetailProductBinding
@@ -18,6 +20,7 @@ import com.catnip.ninsfood_binarch3.model.Product
 import com.catnip.ninsfood_binarch3.utils.GenericViewModelFactory
 import com.catnip.ninsfood_binarch3.utils.proceedWhen
 import com.catnip.ninsfood_binarch3.utils.toCurrencyFormat
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 
 class DetailProductActivity : AppCompatActivity() {
 
@@ -29,7 +32,10 @@ class DetailProductActivity : AppCompatActivity() {
         val database = AppDatabase.getInstance(this)
         val cartDao = database.cartDao()
         val cartDataSource: CartDataSource = CartDatabaseDataSource(cartDao)
-        val repo: CartRepository = CartRepositoryImpl(cartDataSource)
+        val chuckerInterceptor = ChuckerInterceptor(this.applicationContext)
+        val service = NinsFoodApiService.invoke(chuckerInterceptor)
+        val apiDataSource = NinsFoodApiDataSource(service)
+        val repo: CartRepository = CartRepositoryImpl(cartDataSource, apiDataSource)
         GenericViewModelFactory.create(
             DetailProductViewModel(intent?.extras, repo)
         )
@@ -90,7 +96,7 @@ class DetailProductActivity : AppCompatActivity() {
 
     private fun bindProduct(product: Product?) {
         product?.let { item ->
-            binding.ivMenu.load(item.imgUrl) {
+            binding.ivMenu.load(item.imageUrl) {
                 crossfade(true)
             }
             binding.tvTitleListMenu.text = item.name
@@ -107,7 +113,6 @@ class DetailProductActivity : AppCompatActivity() {
         startActivity(mapIntent)
 
     }
-
 
     companion object {
         const val EXTRA_PRODUCT = "EXTRA_PRODUCT"

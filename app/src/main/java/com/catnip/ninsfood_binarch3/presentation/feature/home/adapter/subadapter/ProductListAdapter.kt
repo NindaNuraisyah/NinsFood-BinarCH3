@@ -1,4 +1,4 @@
-package com.catnip.ninsfood_binarch3.presentation.feature.home.adapter
+package com.catnip.ninsfood_binarch3.presentation.feature.home.adapter.subadapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,6 +9,9 @@ import com.catnip.ninsfood_binarch3.core.ViewHolderBinder
 import com.catnip.ninsfood_binarch3.databinding.ItemGridMenuBinding
 import com.catnip.ninsfood_binarch3.databinding.ItemLinearMenuBinding
 import com.catnip.ninsfood_binarch3.model.Product
+import com.catnip.ninsfood_binarch3.presentation.feature.home.adapter.AdapterLayoutMode
+import com.catnip.ninsfood_binarch3.presentation.feature.home.adapter.GridMenuItemViewHolder
+import com.catnip.ninsfood_binarch3.presentation.feature.home.adapter.LinearMenuItemViewHolder
 
 class ProductListAdapter(
     var adapterLayoutMode: AdapterLayoutMode,
@@ -20,7 +23,7 @@ class ProductListAdapter(
             return oldItem.name == newItem.name &&
                     oldItem.desc == newItem.desc &&
                     oldItem.price == newItem.price &&
-                    oldItem.imgUrl == newItem.imgUrl
+                    oldItem.imageUrl == newItem.imageUrl
         }
 
         override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
