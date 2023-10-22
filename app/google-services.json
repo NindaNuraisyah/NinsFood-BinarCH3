@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "788076517012",
+    "project_id": "ninsfood-nindana",
+    "storage_bucket": "ninsfood-nindana.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:788076517012:android:aa3ed99bee05248ade0681",
+        "android_client_info": {
+          "package_name": "com.catnip.ninsfood_binarch3"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHYZeZLUUmtq7r1ELsKTTQ3RSGFXvqnB4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
