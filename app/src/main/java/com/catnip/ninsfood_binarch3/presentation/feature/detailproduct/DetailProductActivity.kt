@@ -53,7 +53,6 @@ class DetailProductActivity : AppCompatActivity() {
     }
 
     private fun observeData() {
-
         viewModel.productCountLiveData.observe(this) {
             binding.tvNumberAmountProduct.text = it.toString()
         }
@@ -102,7 +101,6 @@ class DetailProductActivity : AppCompatActivity() {
         val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
 
         startActivity(mapIntent)
-
     }
 
     companion object {

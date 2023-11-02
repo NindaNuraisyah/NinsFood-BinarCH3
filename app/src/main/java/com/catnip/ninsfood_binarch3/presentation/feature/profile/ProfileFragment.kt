@@ -22,7 +22,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileFragment : Fragment() {
 
-    private val binding : FragmentProfileBinding by lazy {
+    private val binding: FragmentProfileBinding by lazy {
         FragmentProfileBinding.inflate(layoutInflater)
     }
 
@@ -162,7 +162,6 @@ class ProfileFragment : Fragment() {
             .setPositiveButton(
                 getString(R.string.text_button_okay)
             ) { dialog, id ->
-
             }.create()
         dialog.show()
     }
@@ -178,7 +177,6 @@ class ProfileFragment : Fragment() {
             .setNegativeButton(
                 getString(R.string.text_button_no)
             ) { dialog, id ->
-                //no-op , do nothing
             }.create()
         dialog.show()
     }
