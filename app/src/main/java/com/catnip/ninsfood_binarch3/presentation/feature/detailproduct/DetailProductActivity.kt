@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import coil.load
+import com.catnip.ninsfood_binarch3.R
 import com.catnip.ninsfood_binarch3.databinding.ActivityDetailProductBinding
 import com.catnip.ninsfood_binarch3.model.Product
 import com.catnip.ninsfood_binarch3.utils.proceedWhen
@@ -52,6 +53,7 @@ class DetailProductActivity : AppCompatActivity() {
     }
 
     private fun observeData() {
+
         viewModel.productCountLiveData.observe(this) {
             binding.tvNumberAmountProduct.text = it.toString()
         }
@@ -69,7 +71,11 @@ class DetailProductActivity : AppCompatActivity() {
         viewModel.addToCartResult.observe(this) {
             it.proceedWhen(
                 doOnSuccess = {
-                    Toast.makeText(this, "Add to cart success !", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this,
+                        getString(R.string.text_add_to_cart_success),
+                        Toast.LENGTH_SHORT
+                    ).show()
                     finish()
                 },
                 doOnError = {
@@ -96,6 +102,7 @@ class DetailProductActivity : AppCompatActivity() {
         val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
 
         startActivity(mapIntent)
+
     }
 
     companion object {

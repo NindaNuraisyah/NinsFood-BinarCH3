@@ -67,7 +67,7 @@ class ProductListAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        return adapterLayoutMode.ordinal // 0 GRID, 1 Linear
+        return adapterLayoutMode.ordinal
     }
 
     fun submitData(data: List<Product>) {

@@ -69,12 +69,3 @@ class CategoriesListAdapter(private val itemClick: (Categories) -> Unit) :
         }
     }
 }
-
-class MenuItemCategoriesViewHolder(
-    private val binding: ItemCategoriesMenuBinding
-) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(item: Categories) {
-        binding.ivCategory.load(item.imageUrl)
-        binding.tvTitleCategory.text = item.name
-    }
-}

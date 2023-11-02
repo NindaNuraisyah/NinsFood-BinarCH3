@@ -76,4 +76,13 @@
     <string name="rb_cash">Tunai</string>
     <string name="rb_e_wallet">Dompet Digital</string>
     <string name="desc_iv_grid_menu">iv_grid_menu</string>
+    <string name="text_add_to_cart_success">Add to cart success !</string>
+    <string name="text_change_photo_profile_success">Change Photo Profile Success !</string>
+    <string name="text_change_photo_profile_failed">Change Photo Profile Failed !</string>
+    <string name="text_change_profile_data_success">Change Profile Data Success !</string>
+    <string name="text_change_profile_data_failed">Change Profile Data Failed !</string>
+    <string name="text_message_logout">Do you want to logout ?</string>
+    <string name="text_button_yes">Yes</string>
+    <string name="text_button_no">No</string>
+    <string name="text_button_okay">Okay</string>
 </resources>
