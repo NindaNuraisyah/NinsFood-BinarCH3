@@ -6,8 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.catnip.ninsfood_binarch3.data.repository.CartRepository
 import com.catnip.ninsfood_binarch3.model.Cart
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class CartViewModel(private val repo: CartRepository) : ViewModel() {
 
@@ -18,7 +18,7 @@ class CartViewModel(private val repo: CartRepository) : ViewModel() {
     }
 
     fun decreaseCart(item: Cart) {
-        viewModelScope.launch {repo.decreaseCart(item).collect()}
+        viewModelScope.launch { repo.decreaseCart(item).collect() }
     }
 
     fun deleteCart(item: Cart) {
@@ -28,6 +28,4 @@ class CartViewModel(private val repo: CartRepository) : ViewModel() {
     fun setCartNotes(item: Cart) {
         viewModelScope.launch { repo.setCartNotes(item).collect() }
     }
-
-
 }

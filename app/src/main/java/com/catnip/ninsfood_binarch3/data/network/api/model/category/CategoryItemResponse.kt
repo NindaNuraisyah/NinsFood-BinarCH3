@@ -9,12 +9,12 @@ data class CategoryItemResponse(
     @SerializedName("image_url")
     val imgUrl: String?,
     @SerializedName("nama")
-    val name: String?,
+    val name: String?
 )
 
 fun CategoryItemResponse.toCategory() = Categories(
     imageUrl = this.imgUrl.orEmpty(),
-    name = this.name.orEmpty(),
+    name = this.name.orEmpty()
 )
 
 fun Collection<CategoryItemResponse>.toCategoryList() = this.map {

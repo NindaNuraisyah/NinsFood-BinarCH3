@@ -16,7 +16,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/img_bg_cart"/>
+        android:background="@drawable/img_bg_cart"
+        android:contentDescription="@string/desc_iv_logo_app" />
 
     <include
         android:id="@+id/layout_form"

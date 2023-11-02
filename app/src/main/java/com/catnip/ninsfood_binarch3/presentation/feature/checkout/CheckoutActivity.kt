@@ -1,46 +1,21 @@
 package com.catnip.ninsfood_binarch3.presentation.feature.checkout
 
 import android.app.Dialog
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
-import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.catnip.ninsfood_binarch3.R
-import com.catnip.ninsfood_binarch3.data.datasource.local.database.AppDatabase
-import com.catnip.ninsfood_binarch3.data.datasource.local.database.datasource.CartDataSource
-import com.catnip.ninsfood_binarch3.data.datasource.local.database.datasource.CartDatabaseDataSource
-import com.catnip.ninsfood_binarch3.data.network.api.datasource.NinsFoodApiDataSource
-import com.catnip.ninsfood_binarch3.data.network.api.service.NinsFoodApiService
-import com.catnip.ninsfood_binarch3.data.network.firebase.auth.FirebaseAuthDataSourceImpl
-import com.catnip.ninsfood_binarch3.data.repository.CartRepository
-import com.catnip.ninsfood_binarch3.data.repository.CartRepositoryImpl
-import com.catnip.ninsfood_binarch3.data.repository.UserRepository
-import com.catnip.ninsfood_binarch3.data.repository.UserRepositoryImpl
 import com.catnip.ninsfood_binarch3.databinding.ActivityCheckoutBinding
 import com.catnip.ninsfood_binarch3.presentation.common.adapter.CartListAdapter
-import com.catnip.ninsfood_binarch3.utils.GenericViewModelFactory
 import com.catnip.ninsfood_binarch3.utils.proceedWhen
 import com.catnip.ninsfood_binarch3.utils.toCurrencyFormat
-import com.chuckerteam.chucker.api.ChuckerInterceptor
-import com.google.firebase.auth.FirebaseAuth
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CheckoutActivity : AppCompatActivity() {
 
-    private val viewModel: CheckoutViewModel by viewModels {
-        val database = AppDatabase.getInstance(this)
-        val cartDao = database.cartDao()
-        val cartDataSource: CartDataSource = CartDatabaseDataSource(cartDao)
-        val chuckerInterceptor = ChuckerInterceptor(this.applicationContext)
-        val service = NinsFoodApiService.invoke(chuckerInterceptor)
-        val apiDataSource = NinsFoodApiDataSource(service)
-        val firebaseAuth = FirebaseAuth.getInstance()
-        val firebaseDataSource = FirebaseAuthDataSourceImpl(firebaseAuth)
-        val cartRepo: CartRepository = CartRepositoryImpl(cartDataSource, apiDataSource)
-        val userRepo: UserRepository = UserRepositoryImpl(firebaseDataSource)
-        GenericViewModelFactory.create(CheckoutViewModel(cartRepo, userRepo))
-    }
+    private val viewModel: CheckoutViewModel by viewModel()
 
     private val binding: ActivityCheckoutBinding by lazy {
         ActivityCheckoutBinding.inflate(layoutInflater)
@@ -135,7 +110,7 @@ class CheckoutActivity : AppCompatActivity() {
                     binding.layoutContent.root.isVisible = false
                     binding.layoutContent.rvCart.isVisible = false
                     binding.layoutContent.cvSectionOrder.isVisible = false
-                },
+                }
             )
         }
     }

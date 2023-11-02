@@ -3,24 +3,17 @@ package com.catnip.ninsfood_binarch3.presentation.feature.detailproduct
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import coil.load
-import com.catnip.ninsfood_binarch3.data.datasource.local.database.AppDatabase
-import com.catnip.ninsfood_binarch3.data.datasource.local.database.datasource.CartDataSource
-import com.catnip.ninsfood_binarch3.data.datasource.local.database.datasource.CartDatabaseDataSource
-import com.catnip.ninsfood_binarch3.data.network.api.datasource.NinsFoodApiDataSource
-import com.catnip.ninsfood_binarch3.data.network.api.service.NinsFoodApiService
-import com.catnip.ninsfood_binarch3.data.repository.CartRepository
-import com.catnip.ninsfood_binarch3.data.repository.CartRepositoryImpl
 import com.catnip.ninsfood_binarch3.databinding.ActivityDetailProductBinding
 import com.catnip.ninsfood_binarch3.model.Product
-import com.catnip.ninsfood_binarch3.utils.GenericViewModelFactory
 import com.catnip.ninsfood_binarch3.utils.proceedWhen
 import com.catnip.ninsfood_binarch3.utils.toCurrencyFormat
-import com.chuckerteam.chucker.api.ChuckerInterceptor
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class DetailProductActivity : AppCompatActivity() {
 
@@ -28,17 +21,8 @@ class DetailProductActivity : AppCompatActivity() {
         ActivityDetailProductBinding.inflate(layoutInflater)
     }
 
-    private val viewModel: DetailProductViewModel by viewModels {
-        val database = AppDatabase.getInstance(this)
-        val cartDao = database.cartDao()
-        val cartDataSource: CartDataSource = CartDatabaseDataSource(cartDao)
-        val chuckerInterceptor = ChuckerInterceptor(this.applicationContext)
-        val service = NinsFoodApiService.invoke(chuckerInterceptor)
-        val apiDataSource = NinsFoodApiDataSource(service)
-        val repo: CartRepository = CartRepositoryImpl(cartDataSource, apiDataSource)
-        GenericViewModelFactory.create(
-            DetailProductViewModel(intent?.extras, repo)
-        )
+    private val viewModel: DetailProductViewModel by viewModel {
+        parametersOf(intent.extras ?: bundleOf())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,7 +52,6 @@ class DetailProductActivity : AppCompatActivity() {
     }
 
     private fun observeData() {
-
         viewModel.productCountLiveData.observe(this) {
             binding.tvNumberAmountProduct.text = it.toString()
         }
@@ -88,9 +71,11 @@ class DetailProductActivity : AppCompatActivity() {
                 doOnSuccess = {
                     Toast.makeText(this, "Add to cart success !", Toast.LENGTH_SHORT).show()
                     finish()
-                }, doOnError = {
+                },
+                doOnError = {
                     Toast.makeText(this, it.exception?.message.orEmpty(), Toast.LENGTH_SHORT).show()
-                })
+                }
+            )
         }
     }
 
@@ -111,7 +96,6 @@ class DetailProductActivity : AppCompatActivity() {
         val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
 
         startActivity(mapIntent)
-
     }
 
     companion object {

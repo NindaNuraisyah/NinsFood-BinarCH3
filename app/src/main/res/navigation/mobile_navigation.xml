@@ -8,16 +8,16 @@
     <fragment
         android:id="@+id/navigation_cart"
         android:name="com.catnip.ninsfood_binarch3.presentation.feature.cart.CartFragment"
-        android:label="fragment_cart"
+        android:label="cart"
         tools:layout="@layout/fragment_cart" />
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.catnip.ninsfood_binarch3.presentation.feature.profile.ProfileFragment"
-        android:label="fragment_profile"
+        android:label="profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.catnip.ninsfood_binarch3.presentation.feature.home.HomeFragment"
-        android:label="HomeFragment"
+        android:label="home"
         tools:layout="@layout/fragment_home" />
 </navigation>

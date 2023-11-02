@@ -9,14 +9,13 @@ import com.catnip.ninsfood_binarch3.utils.ResultWrapper
 import com.catnip.ninsfood_binarch3.utils.proceedFlow
 import kotlinx.coroutines.flow.Flow
 
-
 interface ProductRepository {
     fun getCategories(): Flow<ResultWrapper<List<Categories>>>
     fun getProducts(category: String? = null): Flow<ResultWrapper<List<Product>>>
 }
 
 class ProductRepositoryImpl(
-    private val apiDataSource: NinsFoodDataSource,
+    private val apiDataSource: NinsFoodDataSource
 ) : ProductRepository {
 
     override fun getCategories(): Flow<ResultWrapper<List<Categories>>> {

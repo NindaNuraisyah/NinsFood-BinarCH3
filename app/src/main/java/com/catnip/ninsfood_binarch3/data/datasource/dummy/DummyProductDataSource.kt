@@ -39,6 +39,6 @@ class DummyProductDataSourceImpl() : DummyProductDataSource {
             imageUrl = "https://raw.githubusercontent.com/NindaNuraisyah/NinsFood/feature/feature_home/app/src/main/res/drawable/img_garden_burger.png",
             desc = "Temani lidah Anda dalam petualangan rasa dengan Garden Burger kami! Patty nabati yang lezat, saus unik, dan pelengkap segar, semua dalam satu gigitan yang memikat.",
             location = "Jl. Purwasari-Sindangagung, Purwasari, Kec. Garawangi, Kabupaten Kuningan, Jawa Barat 45571"
-        ),
+        )
     )
 }

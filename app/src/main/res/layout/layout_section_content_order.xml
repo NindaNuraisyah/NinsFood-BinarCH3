@@ -50,27 +50,27 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_marginTop="1dp"
-                            android:layout_marginRight="1dp"
+                            android:layout_marginEnd="1dp"
                             android:layout_marginBottom="1dp"
                             android:layout_weight="1"
                             android:background="@drawable/selector_toggle_background"
                             android:button="@null"
                             android:gravity="center"
-                            android:text="Ambil Sendiri"
+                            android:text="@string/rb_pick_up"
                             android:textColor="@color/black" />
 
                         <RadioButton
-                            android:id="@+id/search"
+                            android:id="@+id/delivery"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_marginLeft="1dp"
+                            android:layout_marginStart="1dp"
                             android:layout_marginTop="1dp"
                             android:layout_marginBottom="1dp"
                             android:layout_weight="1"
                             android:background="@drawable/selector_toggle_background"
                             android:button="@null"
                             android:gravity="center"
-                            android:text="Dikirim"
+                            android:text="@string/delivery"
                             android:textColor="@color/black" />
 
                     </RadioGroup>
@@ -138,7 +138,7 @@
                             android:background="@drawable/selector_toggle_background"
                             android:button="@null"
                             android:gravity="center"
-                            android:text="Tunai"
+                            android:text="@string/rb_cash"
                             android:textColor="@color/black" />
 
                         <RadioButton
@@ -149,7 +149,7 @@
                             android:background="@drawable/selector_toggle_background"
                             android:button="@null"
                             android:gravity="center"
-                            android:text="Dompet Digital"
+                            android:text="@string/rb_e_wallet"
                             android:textColor="@color/black" />
 
                     </RadioGroup>

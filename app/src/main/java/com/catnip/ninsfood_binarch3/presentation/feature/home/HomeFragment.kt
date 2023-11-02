@@ -1,33 +1,26 @@
 package com.catnip.ninsfood_binarch3.presentation.feature.home
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import com.catnip.ninsfood_binarch3.data.datasource.local.datastore.UserPreferenceDataSourceImpl
-import com.catnip.ninsfood_binarch3.data.datasource.local.datastore.appDataStore
-import com.catnip.ninsfood_binarch3.data.network.api.datasource.NinsFoodApiDataSource
-import com.catnip.ninsfood_binarch3.data.network.api.service.NinsFoodApiService
-import com.catnip.ninsfood_binarch3.data.repository.ProductRepository
-import com.catnip.ninsfood_binarch3.data.repository.ProductRepositoryImpl
+import com.catnip.ninsfood_binarch3.R
 import com.catnip.ninsfood_binarch3.databinding.FragmentHomeBinding
 import com.catnip.ninsfood_binarch3.model.Product
 import com.catnip.ninsfood_binarch3.presentation.feature.detailproduct.DetailProductActivity
 import com.catnip.ninsfood_binarch3.presentation.feature.home.adapter.AdapterLayoutMode
 import com.catnip.ninsfood_binarch3.presentation.feature.home.adapter.subadapter.CategoriesListAdapter
 import com.catnip.ninsfood_binarch3.presentation.feature.home.adapter.subadapter.ProductListAdapter
-import com.catnip.ninsfood_binarch3.utils.GenericViewModelFactory
-import com.catnip.ninsfood_binarch3.utils.PreferenceDataStoreHelperImpl
 import com.catnip.ninsfood_binarch3.utils.proceedWhen
-import com.chuckerteam.chucker.api.ChuckerInterceptor
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
+    private val viewModel: HomeViewModel by viewModel()
 
     private val categoryAdapter: CategoriesListAdapter by lazy {
         CategoriesListAdapter {
@@ -37,21 +30,8 @@ class HomeFragment : Fragment() {
 
     private val productAdapter: ProductListAdapter by lazy {
         ProductListAdapter(AdapterLayoutMode.LINEAR) { product: Product ->
-           navigateToDetail(product)
-       }
-    }
-
-    private val viewModel: HomeViewModel by viewModels {
-        val chuckerInterceptor = ChuckerInterceptor(requireContext().applicationContext)
-        val service = NinsFoodApiService.invoke(chuckerInterceptor)
-        val dataSource = NinsFoodApiDataSource(service)
-        val repo: ProductRepository =
-            ProductRepositoryImpl(dataSource)
-
-        val dataStore = requireActivity().appDataStore
-        val dataStoreHelper = PreferenceDataStoreHelperImpl(dataStore)
-        val userPreferenceDataSource = UserPreferenceDataSourceImpl(dataStoreHelper)
-        GenericViewModelFactory.create(HomeViewModel(repo, userPreferenceDataSource))
+            navigateToDetail(product)
+        }
     }
 
     private fun navigateToDetail(item: Product) {
@@ -59,7 +39,8 @@ class HomeFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
@@ -94,17 +75,17 @@ class HomeFragment : Fragment() {
                 }
                 it.payload?.let { data -> categoryAdapter.submitData(data) }
             }, doOnLoading = {
-                binding.layoutStateCategory.root.isVisible = true
-                binding.layoutStateCategory.pbLoading.isVisible = true
-                binding.layoutStateCategory.tvError.isVisible = false
-                binding.rvCategories.isVisible = false
-            }, doOnError = {
-                binding.layoutStateCategory.root.isVisible = true
-                binding.layoutStateCategory.pbLoading.isVisible = false
-                binding.layoutStateCategory.tvError.isVisible = true
-                binding.layoutStateCategory.tvError.text = it.exception?.message.orEmpty()
-                binding.rvCategories.isVisible = false
-            })
+                    binding.layoutStateCategory.root.isVisible = true
+                    binding.layoutStateCategory.pbLoading.isVisible = true
+                    binding.layoutStateCategory.tvError.isVisible = false
+                    binding.rvCategories.isVisible = false
+                }, doOnError = {
+                    binding.layoutStateCategory.root.isVisible = true
+                    binding.layoutStateCategory.pbLoading.isVisible = false
+                    binding.layoutStateCategory.tvError.isVisible = true
+                    binding.layoutStateCategory.tvError.text = it.exception?.message.orEmpty()
+                    binding.rvCategories.isVisible = false
+                })
         }
         viewModel.products.observe(viewLifecycleOwner) {
             it.proceedWhen(doOnSuccess = {
@@ -117,23 +98,23 @@ class HomeFragment : Fragment() {
                 }
                 it.payload?.let { data -> productAdapter.submitData(data) }
             }, doOnLoading = {
-                binding.layoutStateProduct.root.isVisible = true
-                binding.layoutStateProduct.pbLoading.isVisible = true
-                binding.layoutStateProduct.tvError.isVisible = false
-                binding.rvProduct.isVisible = false
-            }, doOnError = {
-                binding.layoutStateProduct.root.isVisible = true
-                binding.layoutStateProduct.pbLoading.isVisible = false
-                binding.layoutStateProduct.tvError.isVisible = true
-                binding.layoutStateProduct.tvError.text = it.exception?.message.orEmpty()
-                binding.rvProduct.isVisible = false
-            }, doOnEmpty = {
-                binding.layoutStateProduct.root.isVisible = true
-                binding.layoutStateProduct.pbLoading.isVisible = false
-                binding.layoutStateProduct.tvError.isVisible = true
-                binding.layoutStateProduct.tvError.text = "Product not found"
-                binding.rvProduct.isVisible = false
-            })
+                    binding.layoutStateProduct.root.isVisible = true
+                    binding.layoutStateProduct.pbLoading.isVisible = true
+                    binding.layoutStateProduct.tvError.isVisible = false
+                    binding.rvProduct.isVisible = false
+                }, doOnError = {
+                    binding.layoutStateProduct.root.isVisible = true
+                    binding.layoutStateProduct.pbLoading.isVisible = false
+                    binding.layoutStateProduct.tvError.isVisible = true
+                    binding.layoutStateProduct.tvError.text = it.exception?.message.orEmpty()
+                    binding.rvProduct.isVisible = false
+                }, doOnEmpty = {
+                    binding.layoutStateProduct.root.isVisible = true
+                    binding.layoutStateProduct.pbLoading.isVisible = false
+                    binding.layoutStateProduct.tvError.isVisible = true
+                    binding.layoutStateProduct.tvError.text = resources.getString(R.string.product_not_found)
+                    binding.rvProduct.isVisible = false
+                })
         }
     }
     private fun observeGridPref() {
@@ -148,18 +129,18 @@ class HomeFragment : Fragment() {
     }
 
     private fun setSwitchAction() {
-        binding.switchListGrid.setOnCheckedChangeListener{
-                _, isUsingGrid -> viewModel.setUsingGridPref(isUsingGrid)
+        binding.switchListGrid.setOnCheckedChangeListener {
+                _, isUsingGrid ->
+            viewModel.setUsingGridPref(isUsingGrid)
         }
     }
 
     private fun setupList() {
-        val span = if(productAdapter.adapterLayoutMode == AdapterLayoutMode.LINEAR) 1 else 2
+        val span = if (productAdapter.adapterLayoutMode == AdapterLayoutMode.LINEAR) 1 else 2
         binding.rvProduct.apply {
-            layoutManager = GridLayoutManager(requireContext(),span)
+            layoutManager = GridLayoutManager(requireContext(), span)
             adapter = this@HomeFragment.productAdapter
         }
-
     }
     private fun setupSwitch() {
         binding.switchListGrid.setOnCheckedChangeListener { _, isChecked ->
