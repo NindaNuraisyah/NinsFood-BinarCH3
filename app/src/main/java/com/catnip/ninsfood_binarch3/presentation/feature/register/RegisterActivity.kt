@@ -7,15 +7,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.catnip.ninsfood_binarch3.R
-import com.catnip.ninsfood_binarch3.data.network.firebase.auth.FirebaseAuthDataSourceImpl
-import com.catnip.ninsfood_binarch3.data.repository.UserRepositoryImpl
 import com.catnip.ninsfood_binarch3.databinding.ActivityRegisterBinding
 import com.catnip.ninsfood_binarch3.presentation.feature.login.LoginActivity
 import com.catnip.ninsfood_binarch3.presentation.feature.main.MainActivity
 import com.catnip.ninsfood_binarch3.utils.highLightWord
 import com.catnip.ninsfood_binarch3.utils.proceedWhen
 import com.google.android.material.textfield.TextInputLayout
-import com.google.firebase.auth.FirebaseAuth
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RegisterActivity : AppCompatActivity() {
@@ -24,13 +21,6 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private val viewModel: RegisterViewModel by viewModel()
-
-    private fun createViewModel(): RegisterViewModel {
-        val firebaseAuth = FirebaseAuth.getInstance()
-        val dataSource = FirebaseAuthDataSourceImpl(firebaseAuth)
-        val repo = UserRepositoryImpl(dataSource)
-        return RegisterViewModel(repo)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
