@@ -14,4 +14,3 @@ data class Product(
     val desc: String,
     val location: String
 ) : Parcelable
-

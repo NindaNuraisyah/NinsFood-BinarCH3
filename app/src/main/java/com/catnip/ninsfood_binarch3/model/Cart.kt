@@ -1,17 +1,15 @@
 package com.catnip.ninsfood_binarch3.model
 
-import androidx.room.ColumnInfo
-import androidx.room.PrimaryKey
 import com.catnip.ninsfood_binarch3.data.network.api.model.order.OrderItemRequest
 
 data class Cart(
     var id: Int? = null,
-    var productId : String,
-    var productName : String,
-    var productPrice : Int,
+    var productId: String,
+    var productName: String,
+    var productPrice: Int,
     var itemQuantity: Int = 0,
     var productImgUrl: String,
-    var itemNotes: String? = null,
+    var itemNotes: String? = null
 )
 
 fun Cart.toOrderItemRequest() = OrderItemRequest(

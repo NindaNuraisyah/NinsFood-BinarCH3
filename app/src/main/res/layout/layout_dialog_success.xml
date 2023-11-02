@@ -11,13 +11,14 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:src="@drawable/ic_success"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:contentDescription="@string/desc_dialog_icon" />
 
     <TextView
         android:id="@+id/dialog_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pesanan Berhasil"
+        android:text="@string/dialog_title"
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_gravity="center"
@@ -27,7 +28,7 @@
         android:id="@+id/dialog_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Terima kasih! Pesanan Anda telah berhasil diproses."
+        android:text="@string/dialog_message"
         android:layout_gravity="center"
         android:layout_marginTop="16dp"
         android:gravity="center"/>
@@ -36,7 +37,7 @@
         android:id="@+id/dialog_ok_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="OK"
+        android:text="@string/dialog_ok_button"
         android:layout_gravity="center"
         android:layout_marginTop="24dp"
         android:backgroundTint="@color/orange"/>

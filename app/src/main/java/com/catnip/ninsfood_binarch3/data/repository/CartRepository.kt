@@ -32,7 +32,7 @@ interface CartRepository {
 
 class CartRepositoryImpl(
     private val dataSource: CartDataSource,
-    private val apiDataSource: NinsFoodDataSource,
+    private val apiDataSource: NinsFoodDataSource
 ) : CartRepository {
 
     override fun getUserCartData(): Flow<ResultWrapper<Pair<List<Cart>, Int>>> {
@@ -48,10 +48,11 @@ class CartRepositoryImpl(
                     Pair(result, totalPrice)
                 }
             }.map {
-                if (it.payload?.first?.isEmpty() == true)
+                if (it.payload?.first?.isEmpty() == true) {
                     ResultWrapper.Empty(it.payload)
-                else
+                } else {
                     it
+                }
             }
             .onStart {
                 emit(ResultWrapper.Loading())
@@ -71,7 +72,7 @@ class CartRepositoryImpl(
                         itemQuantity = totalQuantity,
                         productImgUrl = product.imageUrl,
                         productName = product.name,
-                        productPrice = product.price,
+                        productPrice = product.price
                     )
                 )
                 affectedRow > 0
@@ -118,5 +119,4 @@ class CartRepositoryImpl(
             apiDataSource.createOrder(orderRequest).status == true
         }
     }
-
 }

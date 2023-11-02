@@ -24,5 +24,4 @@ class NinsFoodApiDataSource(private val service: NinsFoodApiService) : NinsFoodD
     override suspend fun createOrder(orderRequest: OrderRequest): OrderResponse {
         return service.createOrder(orderRequest)
     }
-
 }

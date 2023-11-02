@@ -1,6 +1,5 @@
 package com.catnip.ninsfood_binarch3.data.network.api.service
 
-import java.util.concurrent.TimeUnit
 import com.catnip.ninsfood_binarch3.BuildConfig
 import com.catnip.ninsfood_binarch3.data.network.api.model.category.CategoriesResponse
 import com.catnip.ninsfood_binarch3.data.network.api.model.order.OrderRequest
@@ -14,6 +13,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
+import java.util.concurrent.TimeUnit
 
 interface NinsFoodApiService {
 

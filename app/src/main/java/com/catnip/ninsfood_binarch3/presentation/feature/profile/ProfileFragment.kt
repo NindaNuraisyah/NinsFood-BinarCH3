@@ -3,7 +3,6 @@ package com.catnip.ninsfood_binarch3.presentation.feature.profile
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,7 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.Fragment
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.catnip.ninsfood_binarch3.R
@@ -20,23 +19,23 @@ import com.catnip.ninsfood_binarch3.data.network.firebase.auth.FirebaseAuthDataS
 import com.catnip.ninsfood_binarch3.data.repository.UserRepositoryImpl
 import com.catnip.ninsfood_binarch3.databinding.FragmentProfileBinding
 import com.catnip.ninsfood_binarch3.presentation.feature.login.LoginActivity
-import com.catnip.ninsfood_binarch3.utils.GenericViewModelFactory
 import com.catnip.ninsfood_binarch3.utils.proceedWhen
 import com.google.firebase.auth.FirebaseAuth
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileFragment : Fragment() {
 
-    private val binding : FragmentProfileBinding by lazy {
+    private val binding: FragmentProfileBinding by lazy {
         FragmentProfileBinding.inflate(layoutInflater)
     }
+
+    private val viewModel: ProfileViewModel by viewModel()
+
     private fun createViewModel(): ProfileViewModel {
         val firebaseAuth = FirebaseAuth.getInstance()
         val dataSource = FirebaseAuthDataSourceImpl(firebaseAuth)
         val repo = UserRepositoryImpl(dataSource)
         return ProfileViewModel(repo)
-    }
-    private val viewModel: ProfileViewModel by viewModels {
-        GenericViewModelFactory.create(createViewModel())
     }
     private val pickMedia =
         registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
@@ -45,7 +44,8 @@ class ProfileFragment : Fragment() {
             }
         }
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         return binding.root
@@ -95,7 +95,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun observeData() {
-        viewModel.changePhotoResult.observe(viewLifecycleOwner){
+        viewModel.changePhotoResult.observe(viewLifecycleOwner) {
             it.proceedWhen(
                 doOnSuccess = {
                     Toast.makeText(requireContext(), "Change Photo Profile Success !", Toast.LENGTH_SHORT).show()
@@ -107,7 +107,7 @@ class ProfileFragment : Fragment() {
                 }
             )
         }
-        viewModel.changeProfileResult.observe(viewLifecycleOwner){
+        viewModel.changeProfileResult.observe(viewLifecycleOwner) {
             it.proceedWhen(
                 doOnSuccess = {
                     binding.pbLoading.isVisible = false
@@ -155,7 +155,6 @@ class ProfileFragment : Fragment() {
             .setPositiveButton(
                 "Okay"
             ) { dialog, id ->
-
             }.create()
         dialog.show()
     }
@@ -171,7 +170,6 @@ class ProfileFragment : Fragment() {
             .setNegativeButton(
                 "No"
             ) { dialog, id ->
-                //no-op , do nothing
             }.create()
         dialog.show()
     }
@@ -179,6 +177,4 @@ class ProfileFragment : Fragment() {
     private fun navigateToLogin() {
         context?.startActivity(Intent(requireContext(), LoginActivity::class.java))
     }
-
-
 }

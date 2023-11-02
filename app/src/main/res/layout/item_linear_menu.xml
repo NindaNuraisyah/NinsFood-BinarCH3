@@ -20,7 +20,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/img_fish_burger" />
+            tools:src="@tools:sample/avatars"
+            android:contentDescription="@string/desc_iv_linear_menu" />
 
         <TextView
             android:id="@+id/tv_title_linear_menu"
