@@ -15,7 +15,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/img_fish_burger" />
+        tools:src="@tools:sample/avatars"
+        android:contentDescription="@string/desc_iv_product_list" />
 
     <LinearLayout
         android:id="@+id/ll_title_product_list"
@@ -53,7 +54,8 @@
         android:layout_marginTop="4dp"
         android:src="@drawable/ic_delete"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/desc_iv_delete" />
 
     <LinearLayout
         android:id="@+id/ll_counter_product"
@@ -73,7 +75,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/ic_minus" />
+            android:src="@drawable/ic_minus"
+            android:contentDescription="@string/desc_iv_minus" />
 
         <TextView
             android:id="@+id/tv_product_count"
@@ -91,7 +94,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:maxWidth="240dp"
-            android:src="@drawable/ic_plus" />
+            android:src="@drawable/ic_plus"
+            android:contentDescription="@string/desc_iv_plus" />
     </LinearLayout>
 
     <com.google.android.material.textfield.TextInputEditText
@@ -106,7 +110,6 @@
         android:imeOptions="actionDone"
         android:maxLines="3"
         android:padding="6dp"
-        android:paddingStart="8dp"
         android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@id/iv_product_list"
         app:layout_constraintTop_toBottomOf="@id/ll_counter_product"

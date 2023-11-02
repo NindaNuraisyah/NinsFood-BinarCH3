@@ -18,34 +18,43 @@ class ProductListAdapter(
     private val onClickListener: (Product) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val dataDiffer = AsyncListDiffer(this, object : DiffUtil.ItemCallback<Product>() {
-        override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
-            return oldItem.name == newItem.name &&
+    private val dataDiffer = AsyncListDiffer(
+        this,
+        object : DiffUtil.ItemCallback<Product>() {
+            override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
+                return oldItem.name == newItem.name &&
                     oldItem.desc == newItem.desc &&
                     oldItem.price == newItem.price &&
                     oldItem.imageUrl == newItem.imageUrl
-        }
+            }
 
-        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
-            return oldItem.hashCode() == newItem.hashCode()
+            override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
+                return oldItem.hashCode() == newItem.hashCode()
+            }
         }
-    })
+    )
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             AdapterLayoutMode.GRID.ordinal -> {
                 GridMenuItemViewHolder(
                     binding = ItemGridMenuBinding.inflate(
-                        LayoutInflater.from(parent.context), parent, false
-                    ), onClickListener
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    ),
+                    onClickListener
                 )
             }
 
             else -> {
                 LinearMenuItemViewHolder(
                     binding = ItemLinearMenuBinding.inflate(
-                        LayoutInflater.from(parent.context), parent, false
-                    ), onClickListener
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    ),
+                    onClickListener
                 )
             }
         }
@@ -58,7 +67,7 @@ class ProductListAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        return adapterLayoutMode.ordinal // 0 GRID, 1 Linear
+        return adapterLayoutMode.ordinal
     }
 
     fun submitData(data: List<Product>) {

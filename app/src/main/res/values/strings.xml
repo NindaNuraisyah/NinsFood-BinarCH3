@@ -6,40 +6,11 @@
     <string name="text_discount" translatable="false">Discount 30%</string>
     <string name="text_discount_desc">Pesan Makanan lewat aplikasi dan\ndapatkan diskon mu</string>
     <string name="text_title_categories">Kategori</string>
-    <string name="text_burger_category" translatable="false">Burger</string>
-    <string name="text_noodle_category">Mie</string>
-    <string name="text_juice_category">Jus</string>
-    <string name="text_snack_category" translatable="false">Snack</string>
     <string name="text_header_list_menu">List Menu</string>
-    <string name="text_fish_burger" translatable="false">Fish Burger</string>
-    <string name="text_beef_burger" translatable="false">Beef Burger</string>
-    <string name="text_chicken_burger" translatable="false">Chicken Burger</string>
-    <string name="text_garden_burger" translatable="false">Garden Burger</string>
-    <string name="text_price_fish_burger" translatable="false">Rp. 40.000</string>
-    <string name="text_price_beef_burger" translatable="false">Rp. 45.000</string>
-    <string name="text_price_chicken_burger" translatable="false">Rp. 20.000</string>
-    <string name="text_price_garden_burger" translatable="false">Rp. 15.000</string>
     <string name="desc_background_banner" translatable="false">background_banner</string>
-    <string name="desc_trolley_header" translatable="false">trolley header</string>
-    <string name="desc_user_header" translatable="false">user header</string>
     <string name="desc_search" translatable="false">search</string>
     <string name="desc_discount_banner" translatable="false">discount_banner</string>
-    <string name="desc_burger_category" translatable="false">burger category</string>
-    <string name="desc_noodle_category" translatable="false">noodle category</string>
-    <string name="desc_juice_category" translatable="false">juice category</string>
-    <string name="desc_snack_category" translatable="false">snack_category</string>
-    <string name="desc_view_all_list_menu" translatable="false">view all list menu</string>
-    <string name="desc_fish_burger" translatable="false">fish burger</string>
-    <string name="desc_icon_add_1" translatable="false">icon add 1</string>
-    <string name="desc_beef_burger" translatable="false">beef burger</string>
-    <string name="desc_icon_add_2" translatable="false">icon_add_2</string>
-    <string name="desc_chicken_burger" translatable="false">chicken burger</string>
-    <string name="desc_icon_add_3" translatable="false">icon add 3</string>
-    <string name="desc_garden_burger" translatable="false">garden burger</string>
-    <string name="desc_icon_add_4" translatable="false">icon add 4</string>
     <string name="text_title_menu" translatable="false">Fish Burger</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="text_desc">Fillet ikan garing di atas roti bundar empuk dengan saus dan pelengkap lezat. Rasa dan kenikmatan dalam satu gigitan!</string>
     <string name="text_shop_location">Lokasi</string>
     <string name="text_desc_shop_location" translatable="false">Jl. BSD Green Office Park Jl. BSD Grand Boulevard, Sampora, BSD, Kabupaten Tangerang, Banten 15345</string>
@@ -63,13 +34,7 @@
     <string name="text_payment_method">Metode Pembayaran</string>
     <string name="shopping_summary">Ringkasan Pembayaran</string>
     <string name="total_quantity">x%s</string>
-    <string name="text_no_hp">083823176895</string>
-    <string name="text_username">Ninda Nura\'isyah</string>
     <string name="text_header_profile">Profile</string>
-    <string name="text_title_username">Username\n</string>
-    <string name="text_title_email">Email</string>
-    <string name="text_email">nindanuraisyah0903@gmail.com</string>
-    <string name="text_title_no_hp">No. Telepon</string>
     <string name="hint_name">Your Name</string>
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
@@ -90,4 +55,34 @@
     <string name="text_change_password">Change Password</string>
     <string name="text_logout_account">Logout</string>
     <string name="text_error_name_empty">Name can\\\'t be empty</string>
+    <string name="all">all</string>
+    <string name="desc_ic_arrow_back">ic_arrow_back</string>
+    <string name="desc_iv_logo_app">iv_logo_app</string>
+    <string name="desc_iv_product_list">iv_product_list</string>
+    <string name="desc_iv_minus">iv_minus</string>
+    <string name="desc_iv_plus">iv_plus</string>
+    <string name="desc_iv_product_image">iv_product_image</string>
+    <string name="desc_iv_category">iv_category</string>
+    <string name="desc_iv_linear_menu">iv_linear_menu</string>
+    <string name="desc_icon_add_1">icon_add_1</string>
+    <string name="desc_dialog_icon">dialog_icon</string>
+    <string name="desc_iv_delete">iv_delete</string>
+    <string name="product_not_found">Product not found</string>
+    <string name="dialog_title">Pesanan Berhasil</string>
+    <string name="dialog_message">Terima kasih! Pesanan Anda telah berhasil diproses.</string>
+    <string name="dialog_ok_button">OK</string>
+    <string name="rb_pick_up">Ambil Sendiri</string>
+    <string name="delivery">Dikirim</string>
+    <string name="rb_cash">Tunai</string>
+    <string name="rb_e_wallet">Dompet Digital</string>
+    <string name="desc_iv_grid_menu">iv_grid_menu</string>
+    <string name="text_add_to_cart_success">Add to cart success !</string>
+    <string name="text_change_photo_profile_success">Change Photo Profile Success !</string>
+    <string name="text_change_photo_profile_failed">Change Photo Profile Failed !</string>
+    <string name="text_change_profile_data_success">Change Profile Data Success !</string>
+    <string name="text_change_profile_data_failed">Change Profile Data Failed !</string>
+    <string name="text_message_logout">Do you want to logout ?</string>
+    <string name="text_button_yes">Yes</string>
+    <string name="text_button_no">No</string>
+    <string name="text_button_okay">Okay</string>
 </resources>

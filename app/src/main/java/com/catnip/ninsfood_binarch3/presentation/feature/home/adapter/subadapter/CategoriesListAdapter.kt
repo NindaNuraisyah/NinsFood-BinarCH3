@@ -12,23 +12,25 @@ import com.catnip.ninsfood_binarch3.model.Categories
 class CategoriesListAdapter(private val itemClick: (Categories) -> Unit) :
     RecyclerView.Adapter<CategoriesListAdapter.ItemCategoryViewHolder>() {
 
-
     private val dataDiffer =
-        AsyncListDiffer(this, object : DiffUtil.ItemCallback<Categories>() {
-            override fun areItemsTheSame(
-                oldItem: Categories,
-                newItem: Categories
-            ): Boolean {
-                return oldItem.id == newItem.id
-            }
+        AsyncListDiffer(
+            this,
+            object : DiffUtil.ItemCallback<Categories>() {
+                override fun areItemsTheSame(
+                    oldItem: Categories,
+                    newItem: Categories
+                ): Boolean {
+                    return oldItem.id == newItem.id
+                }
 
-            override fun areContentsTheSame(
-                oldItem: Categories,
-                newItem: Categories
-            ): Boolean {
-                return oldItem.hashCode() == newItem.hashCode()
+                override fun areContentsTheSame(
+                    oldItem: Categories,
+                    newItem: Categories
+                ): Boolean {
+                    return oldItem.hashCode() == newItem.hashCode()
+                }
             }
-        })
+        )
 
     fun submitData(data: List<Categories>) {
         dataDiffer.submitList(data)
@@ -58,21 +60,12 @@ class CategoriesListAdapter(private val itemClick: (Categories) -> Unit) :
 
         fun bindView(item: Categories) {
             with(item) {
-                binding.ivCategory.load(item.imageUrl){
+                binding.ivCategory.load(item.imageUrl) {
                     crossfade(true)
                 }
                 binding.tvTitleCategory.text = item.name
                 itemView.setOnClickListener { itemClick(this) }
             }
         }
-    }
-}
-
-class MenuItemCategoriesViewHolder(
-    private val binding: ItemCategoriesMenuBinding
-) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(item: Categories) {
-        binding.ivCategory.load(item.imageUrl)
-        binding.tvTitleCategory.text = item.name
     }
 }
