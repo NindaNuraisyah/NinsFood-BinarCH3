@@ -2,13 +2,11 @@
     <string name="app_name">NinsFood-BinarCH3</string>
     <string name="text_header_name" translatable="false">Hai Binarian,</string>
     <string name="text_header_greeting">Mau makan apa hari ini?</string>
-    <string name="text_search">Cari</string>
     <string name="text_discount" translatable="false">Discount 30%</string>
     <string name="text_discount_desc">Pesan Makanan lewat aplikasi dan\ndapatkan diskon mu</string>
     <string name="text_title_categories">Kategori</string>
     <string name="text_header_list_menu">List Menu</string>
     <string name="desc_background_banner" translatable="false">background_banner</string>
-    <string name="desc_search" translatable="false">search</string>
     <string name="desc_discount_banner" translatable="false">discount_banner</string>
     <string name="text_title_menu" translatable="false">Fish Burger</string>
     <string name="text_desc">Fillet ikan garing di atas roti bundar empuk dengan saus dan pelengkap lezat. Rasa dan kenikmatan dalam satu gigitan!</string>

@@ -1,6 +1,7 @@
 package com.catnip.ninsfood_binarch3.presentation.feature.checkout
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
@@ -9,6 +10,7 @@ import androidx.core.view.isVisible
 import com.catnip.ninsfood_binarch3.R
 import com.catnip.ninsfood_binarch3.databinding.ActivityCheckoutBinding
 import com.catnip.ninsfood_binarch3.presentation.common.adapter.CartListAdapter
+import com.catnip.ninsfood_binarch3.presentation.feature.main.MainActivity
 import com.catnip.ninsfood_binarch3.utils.proceedWhen
 import com.catnip.ninsfood_binarch3.utils.toCurrencyFormat
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -55,6 +57,13 @@ class CheckoutActivity : AppCompatActivity() {
         observeCheckoutResult()
     }
 
+    private fun backToMain() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
+        finish()
+    }
+
     private fun dialogCheckoutSuccess() {
         val dialog = Dialog(this)
         dialog.setContentView(R.layout.layout_dialog_success)
@@ -63,6 +72,7 @@ class CheckoutActivity : AppCompatActivity() {
         btnOkDialog.setOnClickListener {
             dialog.dismiss()
             deleteCartData()
+            backToMain()
         }
         dialog.show()
     }
